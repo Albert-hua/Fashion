@@ -5,58 +5,140 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ColorWear - Fashion Store</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #fff; color: #333; margin: 0; padding: 0; }
-    header { background: linear-gradient(to right, #f43f5e, #3b82f6); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-    h1 { font-size: 1.5rem; }
-    .lang-toggle { background: #fff; color: #333; padding: 0.3rem 0.6rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
-    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; padding: 2rem; }
-    .product { border: 1px solid #eee; border-radius: 8px; padding: 1rem; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-    .product img { max-width: 100%; border-radius: 8px; }
-    .product select, .product button { margin-top: 0.5rem; padding: 0.4rem 0.8rem; }
-    .cart-btn { display: block; margin: 2rem auto; background: #f43f5e; color: #fff; padding: 0.6rem 1.2rem; border: none; border-radius: 5px; cursor: pointer; }
-    .cart-modal { display: none; position: fixed; top: 10%; left: 50%; transform: translateX(-50%); background: white; padding: 2rem; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0,0,0,0.15); max-width: 400px; width: 90%; z-index: 999; }
-    .cart-modal input, .cart-modal textarea { width: 100%; margin: 0.5rem 0; padding: 0.5rem; }
-    .cart-modal button { margin: 0.3rem 0.3rem; padding: 0.5rem 1rem; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      margin: 0; background-color: #fff; color: #333;
+    }
+    header {
+      background: linear-gradient(to right, #f43f5e, #3b82f6);
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo img { height: 30px; }
+    .lang-toggle {
+      background: #fff; color: #333;
+      padding: 0.3rem 0.6rem; border-radius: 4px;
+      cursor: pointer; font-weight: bold; font-size: 0.9rem;
+    }
+    .products {
+      display: flex; flex-direction: column;
+      padding: 1rem; gap: 1rem;
+    }
+    .product {
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    .product img {
+      max-width: 100%; border-radius: 12px;
+      transition: transform 0.3s;
+    }
+    .product img:hover {
+      transform: scale(1.05);
+    }
+    .price-tag {
+      font-size: 1rem; margin: 0.3rem 0;
+    }
+    .price-tag del { color: #999; font-size: 0.9rem; }
+    .price-tag strong { color: #e60000; font-size: 1.1rem; }
+    select, button {
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      font-size: 1rem;
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .cart-btn {
+      width: 90%; margin: 1rem auto;
+      display: block;
+      background: #f43f5e;
+      color: white; font-weight: bold;
+    }
+    .cart-modal {
+      display: none;
+      position: fixed;
+      top: 5%; left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 1rem;
+      border-radius: 12px;
+      width: 90%; max-width: 400px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      z-index: 999;
+    }
+    .cart-modal input, .cart-modal textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .cart-modal button {
+      width: 100%;
+      margin-top: 0.5rem;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+    }
     .cart-modal ul { padding-left: 1rem; }
-    #historyList { margin: 1rem auto; max-width: 600px; padding: 1rem; background: #f3f3f3; border-radius: 8px; }
-    @media screen and (max-width: 500px) {
-      header, .cart-modal, .products { padding: 1rem; }
-      .product h3, .product p { font-size: 1rem; }
+    #historyList {
+      padding: 1rem;
+      background: #f3f3f3;
+      border-radius: 12px;
+      margin: 1rem;
+    }
+    #historyList ul { padding-left: 1rem; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>ColorWear</h1>
-    <div>
-      <button class="lang-toggle" onclick="toggleLang()">EN / 中文</button>
-      <button class="cart-btn" onclick="showCart()">🛒 <span data-i18n="viewCart">View Cart</span></button>
+    <div class="logo">
+      <a href="https://www.billabong.dk" target="_blank">
+        <img src="https://www.billabong.dk/on/demandware.static/Sites-Billabong_EU-Site/-/default/dw33b0e981/images/logo.svg" alt="Logo" />
+      </a>
     </div>
+    <button class="lang-toggle" onclick="toggleLang()">EN / 中文</button>
   </header>
 
   <section class="products">
     <div class="product">
-      <img src="https://via.placeholder.com/220x220/FF4D4D/FFFFFF?text=Red+Shirt" />
+      <img src="https://images.napali.app/global/billabong-products/all/default/xlarge/ebjzt00168_billabong,w_scs_frt1.jpg" alt="Shirt 1" />
       <h3 data-i18n="product1">Sunset Shirt</h3>
-      <p>$29</p>
+      <div class="price-tag"><del>R$50</del> <strong>R$10</strong> (80% OFF)</div>
       <select id="size1">
         <option value="S">S</option><option value="M">M</option><option value="L">L</option>
-      </select><br>
-      <button onclick="addToCart('Sunset Shirt', 'size1', 29)">Add to Cart</button>
+      </select>
+      <button onclick="addToCart('Sunset Shirt', 'size1', 10)">Add to Cart</button>
     </div>
+
     <div class="product">
-      <img src="https://via.placeholder.com/220x220/3B82F6/FFFFFF?text=Blue+Tee" />
+      <img src="https://images.napali.app/global/billabong-products/all/default/xlarge/ubjwd00369_billabong,w_scs_frt1.jpg" alt="Shirt 2" />
       <h3 data-i18n="product2">Wave Tee</h3>
-      <p>$24</p>
+      <div class="price-tag"><del>R$50</del> <strong>R$10</strong> (80% OFF)</div>
       <select id="size2">
         <option value="S">S</option><option value="M">M</option><option value="L">L</option>
-      </select><br>
-      <button onclick="addToCart('Wave Tee', 'size2', 24)">Add to Cart</button>
+      </select>
+      <button onclick="addToCart('Wave Tee', 'size2', 10)">Add to Cart</button>
     </div>
   </section>
 
+  <button class="cart-btn" onclick="showCart()">🛒 View Cart</button>
+
   <div class="cart-modal" id="cartModal">
-    <h3>🧾 <span data-i18n="orderDetails">Order Details</span></h3>
+    <h3>🧾 Order Details</h3>
     <p id="orderIdText" style="font-weight:bold;"></p>
     <ul id="cartList"></ul>
     <input type="text" id="orderName" placeholder="Name / 姓名" />
@@ -71,12 +153,12 @@
     </a>
     <a href="https://yourpaymentlink.com" target="_blank">
       <button>💳 Pay Online</button>
-    </a><br><br>
+    </a>
     <button onclick="hideCart()">Close</button>
   </div>
 
   <section id="historyList">
-    <h3>📜 <span data-i18n="orderHistory">Order History</span></h3>
+    <h3>📜 Order History</h3>
     <ul id="historyUl"></ul>
   </section>
 
@@ -85,20 +167,8 @@
     const cart = [];
 
     const translations = {
-      en: {
-        viewCart: "View Cart",
-        orderDetails: "Order Details",
-        orderHistory: "Order History",
-        product1: "Sunset Shirt",
-        product2: "Wave Tee"
-      },
-      zh: {
-        viewCart: "购物车",
-        orderDetails: "订单详情",
-        orderHistory: "历史订单",
-        product1: "日落衬衫",
-        product2: "海蓝T恤"
-      }
+      en: { product1: "Sunset Shirt", product2: "Wave Tee" },
+      zh: { product1: "日落衬衫", product2: "海蓝T恤" }
     };
 
     function toggleLang() {
@@ -111,7 +181,7 @@
 
     function addToCart(name, sizeSelectId, price) {
       const size = document.getElementById(sizeSelectId).value;
-      cart.push(`${name} / Size: ${size} / $${price}`);
+      cart.push(`${name} / Size: ${size} / R$${price}`);
       alert("✅ Added to cart");
     }
 
@@ -119,9 +189,7 @@
       const date = new Date();
       const ymd = date.toISOString().slice(0, 10).replace(/-/g, '');
       const random = Math.floor(Math.random() * 9000 + 1000);
-      const orderId = `CW-${ymd}-${random}`;
-      localStorage.setItem('lastOrderId', orderId);
-      return orderId;
+      return `CW-${ymd}-${random}`;
     }
 
     function showCart() {
@@ -132,10 +200,8 @@
         li.textContent = item;
         list.appendChild(li);
       });
-
       const orderID = generateOrderID();
       document.getElementById("orderIdText").textContent = `🧾 Order ID: ${orderID}`;
-      document.getElementById("cartModal").setAttribute("data-order-id", orderID);
       document.getElementById("cartModal").style.display = "block";
     }
 
@@ -150,21 +216,17 @@
       const note = document.getElementById('orderNote').value.trim();
 
       if (!name || !phone || !address) {
-        alert("❗Please fill in Name, Phone, and Address before ordering.");
+        alert("❗Please fill in Name, Phone, and Address.");
         return;
       }
 
-      const orderID = document.getElementById("cartModal").getAttribute("data-order-id") || generateOrderID();
-
-      let message = `🧾 Order ID: ${orderID}%0AHello, I want to order:%0A`;
+      const orderID = document.getElementById("orderIdText").textContent.split(": ")[1] || generateOrderID();
+      let message = `🧾 Order ID: ${orderID}%0AI want to order:%0A`;
       cart.forEach(item => {
         message += `- ${item}%0A`;
       });
       message += `%0AName: ${name}%0APhone: ${phone}%0AAddress: ${address}%0ANotes: ${note || '-'}`;
-
       const encoded = encodeURI(message);
-      const orderRecord = `${orderID} - ${name} - ${cart.length} items`;
-      saveOrderHistory(orderRecord);
 
       if (platform === 'wa') {
         document.getElementById("whatsappLink").href = `https://wa.me/85512345678?text=${encoded}`;
@@ -173,18 +235,8 @@
       }
     }
 
-    function saveOrderHistory(record) {
-      const ul = document.getElementById("historyUl");
-      const li = document.createElement("li");
-      li.textContent = record;
-      ul.appendChild(li);
-      const history = JSON.parse(localStorage.getItem("orderHistory") || "[]");
-      history.push(record);
-      localStorage.setItem("orderHistory", JSON.stringify(history));
-    }
-
-    window.onload = function() {
-      toggleLang(); // 默认切换一次语言
+    window.onload = function () {
+      toggleLang();
       const history = JSON.parse(localStorage.getItem("orderHistory") || "[]");
       const ul = document.getElementById("historyUl");
       history.forEach(record => {
