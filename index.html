@@ -84,6 +84,39 @@
       font-size: 0.875rem;
       color: #666;
     }
+    .about {
+      padding: 3rem 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .about h2 {
+      font-size: 2rem;
+      color: #f43f5e;
+      margin-bottom: 1rem;
+    }
+    .about p, .about ul {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #333;
+      margin-bottom: 1.2rem;
+    }
+    .details {
+      padding: 2rem;
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+    .carousel {
+      display: flex;
+      overflow-x: scroll;
+      gap: 1rem;
+    }
+    .carousel img {
+      max-height: 300px;
+      border-radius: 10px;
+    }
+    .size-select {
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -92,8 +125,8 @@
     <nav>
       <a href="#">Home</a>
       <a href="#">Shop</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
@@ -107,20 +140,79 @@
       <img src="https://source.unsplash.com/300x300/?clothing,fashion" alt="Product" />
       <h3>Sunset Shirt</h3>
       <p>$19.99</p>
-      <button>Add to Cart</button>
+      <button onclick="location.href='#sunset'">View</button>
     </div>
     <div class="product">
       <img src="https://source.unsplash.com/301x301/?fashion,tshirt" alt="Product" />
       <h3>Wave Tee</h3>
       <p>$14.99</p>
-      <button>Add to Cart</button>
+      <button onclick="location.href='#wave'">View</button>
     </div>
-    <div class="product">
-      <img src="https://source.unsplash.com/302x302/?fashion,dress" alt="Product" />
-      <h3>Tropic Dress</h3>
-      <p>$29.99</p>
-      <button>Add to Cart</button>
+  </section>
+
+  <section class="details" id="sunset">
+    <div class="carousel">
+      <img src="https://source.unsplash.com/400x400/?shirt,red" alt="Sunset Shirt" />
+      <img src="https://source.unsplash.com/401x400/?shirt,orange" alt="Sunset Shirt Side" />
     </div>
+    <h3>Sunset Shirt</h3>
+    <p>USD $19.99</p>
+    <p>
+      Feel the heat with the <strong>Sunset Shirt</strong> – inspired by tropical evenings in Bali.
+      Made from 100% soft cotton, it features a bold red-to-orange gradient and a relaxed fit that’s perfect for both day adventures and night hangouts.
+    </p>
+    <ul>
+      <li>🌈 Unisex design, available in 5 sizes</li>
+      <li>🧺 Machine washable</li>
+      <li>🚚 Delivery in 3–5 days across Southeast Asia</li>
+    </ul>
+    <div class="size-select">
+      <label for="size-sunset">Size:</label>
+      <select id="size-sunset">
+        <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="details" id="wave">
+    <div class="carousel">
+      <img src="https://source.unsplash.com/402x402/?blue,shirt" alt="Wave Tee" />
+      <img src="https://source.unsplash.com/403x403/?ocean,tshirt" alt="Wave Tee Side" />
+    </div>
+    <h3>Wave Tee</h3>
+    <p>USD $14.99</p>
+    <p>
+      Chill in cool tones with the <strong>Wave Tee</strong>.
+      Featuring a unique blue swirl pattern, this tee captures the breeze and energy of ocean life. Lightweight and breezy — perfect for humid days.
+    </p>
+    <ul>
+      <li>👕 100% breathable cotton</li>
+      <li>🔵 Aqua blue print design</li>
+      <li>🛒 Available in S to XXL</li>
+    </ul>
+    <div class="size-select">
+      <label for="size-wave">Size:</label>
+      <select id="size-wave">
+        <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <h2>About ColorWear</h2>
+    <p>
+      At <strong>ColorWear</strong>, we believe that fashion should be fun, fearless, and full of color.
+      Born in the heart of Southeast Asia, our mission is to empower young people to express themselves boldly through bright, energetic styles inspired by local culture, sunshine, and street vibes.
+    </p>
+    <p>
+      Whether you're on the beach, in the city, or dancing at a street festival — our clothes are made for movement, comfort, and confidence.
+      All our collections are produced with breathable fabrics, vibrant colors, and inclusive sizing.
+    </p>
+    <p>
+      💳 We support local bank card payments<br />
+      📦 Fast delivery across SEA region<br />
+      ✨ 100% Satisfaction Guarantee
+    </p>
   </section>
 
   <footer>
@@ -128,3 +220,4 @@
   </footer>
 </body>
 </html>
+
