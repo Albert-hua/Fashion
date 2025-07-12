@@ -6,120 +6,36 @@
   <title>ColorWear - Trendy Fashion Store</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #fff;
-      color: #333;
-    }
-    header {
-      background: linear-gradient(to right, #f43f5e, #3b82f6);
-      color: white;
-      padding: 1.5rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header h1 {
-      font-size: 1.75rem;
-    }
-    nav a {
-      color: white;
-      margin-left: 1.5rem;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .hero {
-      background: #fde047;
-      text-align: center;
-      padding: 3rem 1rem;
-    }
-    .hero h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-    }
-    .product {
-      border: 1px solid #eee;
-      border-radius: 0.75rem;
-      padding: 1rem;
-      text-align: center;
-      background: #fff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-    }
-    .product img {
-      max-width: 100%;
-      border-radius: 0.5rem;
-      margin-bottom: 0.75rem;
-    }
-    .product h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-    .product p {
-      color: #888;
-      margin-bottom: 0.75rem;
-    }
-    .product button {
-      background: #3b82f6;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-    }
-    footer {
-      background: #f3f4f6;
-      padding: 2rem;
-      text-align: center;
-      font-size: 0.875rem;
-      color: #666;
-    }
-    .about {
-      padding: 3rem 1rem;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .about h2 {
-      font-size: 2rem;
-      color: #f43f5e;
-      margin-bottom: 1rem;
-    }
-    .about p, .about ul {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: #333;
-      margin-bottom: 1.2rem;
-    }
-    .details {
-      padding: 2rem;
-      max-width: 800px;
-      margin: 2rem auto;
-    }
-    .carousel {
-      display: flex;
-      overflow-x: scroll;
-      gap: 1rem;
-    }
-    .carousel img {
-      max-height: 300px;
-      border-radius: 10px;
-    }
-    .size-select {
-      margin-top: 1rem;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background-color: #fff; color: #333; }
+    header { background: linear-gradient(to right, #f43f5e, #3b82f6); color: white; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 1.75rem; }
+    nav a { color: white; margin-left: 1.5rem; text-decoration: none; font-weight: 600; }
+    .hero { background: #fde047; text-align: center; padding: 3rem 1rem; }
+    .hero h2 { font-size: 2rem; margin-bottom: 1rem; }
+    .lang-switch { position: absolute; top: 1rem; right: 1rem; }
+    .lang-switch button { margin-left: 0.5rem; padding: 0.3rem 0.7rem; font-weight: 600; border: none; border-radius: 4px; cursor: pointer; background: white; color: #3b82f6; }
+    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; padding: 2rem; }
+    .product { border: 1px solid #eee; border-radius: 0.75rem; padding: 1rem; text-align: center; background: #fff; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06); }
+    .product img { max-width: 100%; border-radius: 0.5rem; margin-bottom: 0.75rem; }
+    .product h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .product p { color: #888; margin-bottom: 0.75rem; }
+    .product button, .buy-btn { background: #3b82f6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; }
+    .buy-btn { margin-top: 1rem; display: inline-block; text-decoration: none; text-align: center; }
+    footer { background: #f3f4f6; padding: 2rem; text-align: center; font-size: 0.875rem; color: #666; }
+    .about, .details { padding: 3rem 1rem; max-width: 800px; margin: 0 auto; }
+    .about h2, .details h3 { font-size: 2rem; color: #f43f5e; margin-bottom: 1rem; }
+    .about p, .about ul, .details p, .details ul { font-size: 1.1rem; line-height: 1.8; color: #333; margin-bottom: 1.2rem; }
+    .carousel { display: flex; overflow-x: scroll; gap: 1rem; margin-bottom: 1rem; }
+    .carousel img { max-height: 300px; border-radius: 10px; }
+    .size-select { margin-top: 1rem; }
   </style>
 </head>
 <body>
+  <div class="lang-switch">
+    <button onclick="switchLang('en')">EN</button>
+    <button onclick="switchLang('zh')">中</button>
+  </div>
   <header>
     <h1>ColorWear</h1>
     <nav>
@@ -131,8 +47,8 @@
   </header>
 
   <section class="hero">
-    <h2>Colorful Fashion for Southeast Asia 🌈</h2>
-    <p>Express yourself in vibrant styles. Local shipping available.</p>
+    <h2 data-en="Colorful Fashion for Southeast Asia 🌈" data-zh="为东南亚打造的多彩潮流穿搭 🌈">Colorful Fashion for Southeast Asia 🌈</h2>
+    <p data-en="Express yourself in vibrant styles. Local shipping available." data-zh="用鲜艳风格表达你自己，支持本地配送。">Express yourself in vibrant styles. Local shipping available.</p>
   </section>
 
   <section class="products">
@@ -156,15 +72,12 @@
       <img src="https://source.unsplash.com/401x400/?shirt,orange" alt="Sunset Shirt Side" />
     </div>
     <h3>Sunset Shirt</h3>
-    <p>USD $19.99</p>
-    <p>
-      Feel the heat with the <strong>Sunset Shirt</strong> – inspired by tropical evenings in Bali.
-      Made from 100% soft cotton, it features a bold red-to-orange gradient and a relaxed fit that’s perfect for both day adventures and night hangouts.
-    </p>
+    <p>$19.99</p>
+    <p data-en="Feel the heat with the Sunset Shirt – inspired by tropical evenings in Bali." data-zh="感受 Sunset Shirt 的热情 —— 灵感来自巴厘岛的热带黄昏。">Feel the heat with the Sunset Shirt – inspired by tropical evenings in Bali.</p>
     <ul>
-      <li>🌈 Unisex design, available in 5 sizes</li>
-      <li>🧺 Machine washable</li>
-      <li>🚚 Delivery in 3–5 days across Southeast Asia</li>
+      <li data-en="Unisex design, available in 5 sizes" data-zh="男女通用设计，共 5 个尺码">Unisex design, available in 5 sizes</li>
+      <li data-en="Machine washable" data-zh="可机洗">Machine washable</li>
+      <li data-en="Delivery in 3–5 days across Southeast Asia" data-zh="3-5 天东南亚本地配送">Delivery in 3–5 days across Southeast Asia</li>
     </ul>
     <div class="size-select">
       <label for="size-sunset">Size:</label>
@@ -172,6 +85,7 @@
         <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
       </select>
     </div>
+    <a href="https://wa.me/" target="_blank" class="buy-btn" data-en="Order via WhatsApp" data-zh="通过 WhatsApp 下单">Order via WhatsApp</a>
   </section>
 
   <section class="details" id="wave">
@@ -180,15 +94,12 @@
       <img src="https://source.unsplash.com/403x403/?ocean,tshirt" alt="Wave Tee Side" />
     </div>
     <h3>Wave Tee</h3>
-    <p>USD $14.99</p>
-    <p>
-      Chill in cool tones with the <strong>Wave Tee</strong>.
-      Featuring a unique blue swirl pattern, this tee captures the breeze and energy of ocean life. Lightweight and breezy — perfect for humid days.
-    </p>
+    <p>$14.99</p>
+    <p data-en="Chill in cool tones with the Wave Tee. Featuring a unique blue swirl pattern." data-zh="Wave Tee 带来清凉色调，配有独特的蓝色波浪图案。">Chill in cool tones with the Wave Tee. Featuring a unique blue swirl pattern.</p>
     <ul>
-      <li>👕 100% breathable cotton</li>
-      <li>🔵 Aqua blue print design</li>
-      <li>🛒 Available in S to XXL</li>
+      <li data-en="100% breathable cotton" data-zh="100% 透气纯棉">100% breathable cotton</li>
+      <li data-en="Aqua blue print design" data-zh="水蓝印花设计">Aqua blue print design</li>
+      <li data-en="Available in S to XXL" data-zh="尺码从 S 到 XXL 可选">Available in S to XXL</li>
     </ul>
     <div class="size-select">
       <label for="size-wave">Size:</label>
@@ -196,28 +107,27 @@
         <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
       </select>
     </div>
+    <a href="https://wa.me/" target="_blank" class="buy-btn" data-en="Order via WhatsApp" data-zh="通过 WhatsApp 下单">Order via WhatsApp</a>
   </section>
 
   <section class="about" id="about">
-    <h2>About ColorWear</h2>
-    <p>
-      At <strong>ColorWear</strong>, we believe that fashion should be fun, fearless, and full of color.
-      Born in the heart of Southeast Asia, our mission is to empower young people to express themselves boldly through bright, energetic styles inspired by local culture, sunshine, and street vibes.
-    </p>
-    <p>
-      Whether you're on the beach, in the city, or dancing at a street festival — our clothes are made for movement, comfort, and confidence.
-      All our collections are produced with breathable fabrics, vibrant colors, and inclusive sizing.
-    </p>
-    <p>
-      💳 We support local bank card payments<br />
-      📦 Fast delivery across SEA region<br />
-      ✨ 100% Satisfaction Guarantee
-    </p>
+    <h2 data-en="About ColorWear" data-zh="关于 ColorWear">About ColorWear</h2>
+    <p data-en="At ColorWear, we believe that fashion should be fun, fearless, and full of color." data-zh="在 ColorWear，我们相信时尚应该是有趣、无畏、充满色彩的。">At ColorWear, we believe that fashion should be fun, fearless, and full of color.</p>
+    <p data-en="Born in Southeast Asia, we empower youth with vibrant styles inspired by local culture." data-zh="源自东南亚，我们以本地文化为灵感，为年轻人打造鲜明风格。">Born in Southeast Asia, we empower youth with vibrant styles inspired by local culture.</p>
+    <p data-en="💳 Local bank card payment supported<br>📦 Fast SEA shipping<br>✨ 100% Satisfaction Guarantee" data-zh="💳 支持本地银行卡支付<br>📦 快速东南亚地区配送<br>✨ 100% 满意保证">💳 Local bank card payment supported<br>📦 Fast SEA shipping<br>✨ 100% Satisfaction Guarantee</p>
   </section>
 
   <footer>
     &copy; 2025 ColorWear. All rights reserved. | Payments via local bank cards
   </footer>
+
+  <script>
+    function switchLang(lang) {
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang);
+      });
+    }
+  </script>
 </body>
 </html>
 
