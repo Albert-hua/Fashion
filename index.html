@@ -22,6 +22,11 @@
     .product p { color: #888; margin-bottom: 0.75rem; }
     .product button, .buy-btn { background: #3b82f6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; }
     .buy-btn { margin-top: 1rem; display: inline-block; text-decoration: none; text-align: center; }
+    .cart-btn { margin-top: 1rem; display: inline-block; padding: 0.5rem 1rem; border-radius: 0.5rem; border: 1px solid #3b82f6; background: #fff; color: #3b82f6; font-weight: 600; cursor: pointer; }
+    .cart-modal { position: fixed; top: 20%; left: 50%; transform: translate(-50%, -20%); background: white; padding: 2rem; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0,0,0,0.15); display: none; z-index: 999; max-width: 400px; width: 90%; }
+    .cart-modal h4 { margin-bottom: 1rem; font-size: 1.25rem; }
+    .cart-modal ul { margin-bottom: 1rem; }
+    .cart-modal button { background: #f43f5e; color: white; border: none; padding: 0.5rem 1rem; cursor: pointer; border-radius: 0.5rem; }
     footer { background: #f3f4f6; padding: 2rem; text-align: center; font-size: 0.875rem; color: #666; }
     .about, .details { padding: 3rem 1rem; max-width: 800px; margin: 0 auto; }
     .about h2, .details h3 { font-size: 2rem; color: #f43f5e; margin-bottom: 1rem; }
@@ -42,7 +47,7 @@
       <a href="#">Home</a>
       <a href="#">Shop</a>
       <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#" onclick="showCart()">🛒 Cart</a>
     </nav>
   </header>
 
@@ -85,7 +90,7 @@
         <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
       </select>
     </div>
-    <a href="https://wa.me/" target="_blank" class="buy-btn" data-en="Order via WhatsApp" data-zh="通过 WhatsApp 下单">Order via WhatsApp</a>
+    <button class="cart-btn" onclick="addToCart('Sunset Shirt', 'size-sunset', 19.99)">Add to Cart</button>
   </section>
 
   <section class="details" id="wave">
@@ -107,7 +112,7 @@
         <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
       </select>
     </div>
-    <a href="https://wa.me/" target="_blank" class="buy-btn" data-en="Order via WhatsApp" data-zh="通过 WhatsApp 下单">Order via WhatsApp</a>
+    <button class="cart-btn" onclick="addToCart('Wave Tee', 'size-wave', 14.99)">Add to Cart</button>
   </section>
 
   <section class="about" id="about">
@@ -116,6 +121,15 @@
     <p data-en="Born in Southeast Asia, we empower youth with vibrant styles inspired by local culture." data-zh="源自东南亚，我们以本地文化为灵感，为年轻人打造鲜明风格。">Born in Southeast Asia, we empower youth with vibrant styles inspired by local culture.</p>
     <p data-en="💳 Local bank card payment supported<br>📦 Fast SEA shipping<br>✨ 100% Satisfaction Guarantee" data-zh="💳 支持本地银行卡支付<br>📦 快速东南亚地区配送<br>✨ 100% 满意保证">💳 Local bank card payment supported<br>📦 Fast SEA shipping<br>✨ 100% Satisfaction Guarantee</p>
   </section>
+
+  <div class="cart-modal" id="cartModal">
+    <h4>Your Cart</h4>
+    <ul id="cartList"></ul>
+    <a href="https://wa.me/" target="_blank">
+      <button>Order via WhatsApp</button>
+    </a>
+    <button onclick="hideCart()">Close</button>
+  </div>
 
   <footer>
     &copy; 2025 ColorWear. All rights reserved. | Payments via local bank cards
@@ -127,7 +141,29 @@
         el.textContent = el.getAttribute('data-' + lang);
       });
     }
+
+    const cart = [];
+
+    function addToCart(name, sizeSelectId, price) {
+      const size = document.getElementById(sizeSelectId).value;
+      cart.push(`${name} - Size: ${size} - $${price}`);
+      alert("Added to cart");
+    }
+
+    function showCart() {
+      const list = document.getElementById("cartList");
+      list.innerHTML = "";
+      cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        list.appendChild(li);
+      });
+      document.getElementById("cartModal").style.display = "block";
+    }
+
+    function hideCart() {
+      document.getElementById("cartModal").style.display = "none";
+    }
   </script>
 </body>
 </html>
-
