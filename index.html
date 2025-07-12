@@ -3,151 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ColorWear - Trendy Fashion Store</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <title>ColorWear - Fashion Store</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background-color: #fff; color: #333; }
-    header { background: linear-gradient(to right, #f43f5e, #3b82f6); color: white; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-    header h1 { font-size: 1.75rem; }
-    nav a { color: white; margin-left: 1.5rem; text-decoration: none; font-weight: 600; }
-    .hero { background: #fde047; text-align: center; padding: 3rem 1rem; }
-    .hero h2 { font-size: 2rem; margin-bottom: 1rem; }
-    .lang-switch { position: absolute; top: 1rem; right: 1rem; }
-    .lang-switch button { margin-left: 0.5rem; padding: 0.3rem 0.7rem; font-weight: 600; border: none; border-radius: 4px; cursor: pointer; background: white; color: #3b82f6; }
-    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; padding: 2rem; }
-    .product { border: 1px solid #eee; border-radius: 0.75rem; padding: 1rem; text-align: center; background: #fff; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06); }
-    .product img { max-width: 100%; border-radius: 0.5rem; margin-bottom: 0.75rem; }
-    .product h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
-    .product p { color: #888; margin-bottom: 0.75rem; }
-    .product button, .buy-btn { background: #3b82f6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; }
-    .buy-btn { margin-top: 1rem; display: inline-block; text-decoration: none; text-align: center; }
-    .cart-btn { margin-top: 1rem; display: inline-block; padding: 0.5rem 1rem; border-radius: 0.5rem; border: 1px solid #3b82f6; background: #fff; color: #3b82f6; font-weight: 600; cursor: pointer; }
-    .cart-modal { position: fixed; top: 20%; left: 50%; transform: translate(-50%, -20%); background: white; padding: 2rem; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0,0,0,0.15); display: none; z-index: 999; max-width: 400px; width: 90%; }
-    .cart-modal h4 { margin-bottom: 1rem; font-size: 1.25rem; }
-    .cart-modal ul { margin-bottom: 1rem; }
-    .cart-modal button { background: #f43f5e; color: white; border: none; padding: 0.5rem 1rem; cursor: pointer; border-radius: 0.5rem; }
-    footer { background: #f3f4f6; padding: 2rem; text-align: center; font-size: 0.875rem; color: #666; }
-    .about, .details { padding: 3rem 1rem; max-width: 800px; margin: 0 auto; }
-    .about h2, .details h3 { font-size: 2rem; color: #f43f5e; margin-bottom: 1rem; }
-    .about p, .about ul, .details p, .details ul { font-size: 1.1rem; line-height: 1.8; color: #333; margin-bottom: 1.2rem; }
-    .carousel { display: flex; overflow-x: scroll; gap: 1rem; margin-bottom: 1rem; }
-    .carousel img { max-height: 300px; border-radius: 10px; }
-    .size-select { margin-top: 1rem; }
+    body { font-family: Arial, sans-serif; background: #fff; color: #333; margin: 0; padding: 0; }
+    header { background: linear-gradient(to right, #f43f5e, #3b82f6); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    h1 { font-size: 1.5rem; }
+    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; padding: 2rem; }
+    .product { border: 1px solid #eee; border-radius: 8px; padding: 1rem; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .product img { max-width: 100%; border-radius: 8px; }
+    .product select, .product button { margin-top: 0.5rem; padding: 0.4rem 0.8rem; }
+    .cart-btn { display: block; margin: 2rem auto; background: #f43f5e; color: #fff; padding: 0.6rem 1.2rem; border: none; border-radius: 5px; cursor: pointer; }
+    .cart-modal { display: none; position: fixed; top: 10%; left: 50%; transform: translateX(-50%); background: white; padding: 2rem; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0,0,0,0.15); max-width: 400px; width: 90%; z-index: 999; }
+    .cart-modal input, .cart-modal textarea { width: 100%; margin: 0.5rem 0; padding: 0.5rem; }
+    .cart-modal button { margin: 0.3rem 0.3rem; padding: 0.5rem 1rem; }
+    .cart-modal ul { padding-left: 1rem; }
   </style>
 </head>
 <body>
-  <div class="lang-switch">
-    <button onclick="switchLang('en')">EN</button>
-    <button onclick="switchLang('zh')">中</button>
-  </div>
   <header>
     <h1>ColorWear</h1>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Shop</a>
-      <a href="#about">About</a>
-      <a href="#" onclick="showCart()">🛒 Cart</a>
-    </nav>
+    <button class="cart-btn" onclick="showCart()">🛒 View Cart</button>
   </header>
-
-  <section class="hero">
-    <h2 data-en="Colorful Fashion for Southeast Asia 🌈" data-zh="为东南亚打造的多彩潮流穿搭 🌈">Colorful Fashion for Southeast Asia 🌈</h2>
-    <p data-en="Express yourself in vibrant styles. Local shipping available." data-zh="用鲜艳风格表达你自己，支持本地配送。">Express yourself in vibrant styles. Local shipping available.</p>
-  </section>
 
   <section class="products">
     <div class="product">
-      <img src="https://source.unsplash.com/300x300/?clothing,fashion" alt="Product" />
+      <img src="https://via.placeholder.com/220x220/FF4D4D/FFFFFF?text=Red+Shirt" />
       <h3>Sunset Shirt</h3>
-      <p>$19.99</p>
-      <button onclick="location.href='#sunset'">View</button>
+      <p>$29</p>
+      <select id="size1">
+        <option value="S">S</option><option value="M">M</option><option value="L">L</option>
+      </select><br>
+      <button onclick="addToCart('Sunset Shirt', 'size1', 29)">Add to Cart</button>
     </div>
     <div class="product">
-      <img src="https://source.unsplash.com/301x301/?fashion,tshirt" alt="Product" />
+      <img src="https://via.placeholder.com/220x220/3B82F6/FFFFFF?text=Blue+Tee" />
       <h3>Wave Tee</h3>
-      <p>$14.99</p>
-      <button onclick="location.href='#wave'">View</button>
+      <p>$24</p>
+      <select id="size2">
+        <option value="S">S</option><option value="M">M</option><option value="L">L</option>
+      </select><br>
+      <button onclick="addToCart('Wave Tee', 'size2', 24)">Add to Cart</button>
     </div>
-  </section>
-
-  <section class="details" id="sunset">
-    <div class="carousel">
-      <img src="https://source.unsplash.com/400x400/?shirt,red" alt="Sunset Shirt" />
-      <img src="https://source.unsplash.com/401x400/?shirt,orange" alt="Sunset Shirt Side" />
-    </div>
-    <h3>Sunset Shirt</h3>
-    <p>$19.99</p>
-    <p data-en="Feel the heat with the Sunset Shirt – inspired by tropical evenings in Bali." data-zh="感受 Sunset Shirt 的热情 —— 灵感来自巴厘岛的热带黄昏。">Feel the heat with the Sunset Shirt – inspired by tropical evenings in Bali.</p>
-    <ul>
-      <li data-en="Unisex design, available in 5 sizes" data-zh="男女通用设计，共 5 个尺码">Unisex design, available in 5 sizes</li>
-      <li data-en="Machine washable" data-zh="可机洗">Machine washable</li>
-      <li data-en="Delivery in 3–5 days across Southeast Asia" data-zh="3-5 天东南亚本地配送">Delivery in 3–5 days across Southeast Asia</li>
-    </ul>
-    <div class="size-select">
-      <label for="size-sunset">Size:</label>
-      <select id="size-sunset">
-        <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
-      </select>
-    </div>
-    <button class="cart-btn" onclick="addToCart('Sunset Shirt', 'size-sunset', 19.99)">Add to Cart</button>
-  </section>
-
-  <section class="details" id="wave">
-    <div class="carousel">
-      <img src="https://source.unsplash.com/402x402/?blue,shirt" alt="Wave Tee" />
-      <img src="https://source.unsplash.com/403x403/?ocean,tshirt" alt="Wave Tee Side" />
-    </div>
-    <h3>Wave Tee</h3>
-    <p>$14.99</p>
-    <p data-en="Chill in cool tones with the Wave Tee. Featuring a unique blue swirl pattern." data-zh="Wave Tee 带来清凉色调，配有独特的蓝色波浪图案。">Chill in cool tones with the Wave Tee. Featuring a unique blue swirl pattern.</p>
-    <ul>
-      <li data-en="100% breathable cotton" data-zh="100% 透气纯棉">100% breathable cotton</li>
-      <li data-en="Aqua blue print design" data-zh="水蓝印花设计">Aqua blue print design</li>
-      <li data-en="Available in S to XXL" data-zh="尺码从 S 到 XXL 可选">Available in S to XXL</li>
-    </ul>
-    <div class="size-select">
-      <label for="size-wave">Size:</label>
-      <select id="size-wave">
-        <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
-      </select>
-    </div>
-    <button class="cart-btn" onclick="addToCart('Wave Tee', 'size-wave', 14.99)">Add to Cart</button>
-  </section>
-
-  <section class="about" id="about">
-    <h2 data-en="About ColorWear" data-zh="关于 ColorWear">About ColorWear</h2>
-    <p data-en="At ColorWear, we believe that fashion should be fun, fearless, and full of color." data-zh="在 ColorWear，我们相信时尚应该是有趣、无畏、充满色彩的。">At ColorWear, we believe that fashion should be fun, fearless, and full of color.</p>
-    <p data-en="Born in Southeast Asia, we empower youth with vibrant styles inspired by local culture." data-zh="源自东南亚，我们以本地文化为灵感，为年轻人打造鲜明风格。">Born in Southeast Asia, we empower youth with vibrant styles inspired by local culture.</p>
-    <p data-en="💳 Local bank card payment supported<br>📦 Fast SEA shipping<br>✨ 100% Satisfaction Guarantee" data-zh="💳 支持本地银行卡支付<br>📦 快速东南亚地区配送<br>✨ 100% 满意保证">💳 Local bank card payment supported<br>📦 Fast SEA shipping<br>✨ 100% Satisfaction Guarantee</p>
   </section>
 
   <div class="cart-modal" id="cartModal">
-    <h4>Your Cart</h4>
+    <h3>🧾 Order Details</h3>
+    <p id="orderIdText" style="font-weight:bold;"></p>
     <ul id="cartList"></ul>
-    <a href="https://wa.me/" target="_blank">
-      <button>Order via WhatsApp</button>
+    <input type="text" id="orderName" placeholder="Name / 姓名" />
+    <input type="text" id="orderPhone" placeholder="Phone / 电话" />
+    <input type="text" id="orderAddress" placeholder="Address / 地址" />
+    <textarea id="orderNote" placeholder="Notes / 备注"></textarea>
+    <a id="whatsappLink" href="#" target="_blank">
+      <button onclick="generateOrderMessage('wa')">📩 Send via WhatsApp</button>
     </a>
+    <a id="telegramLink" href="#" target="_blank">
+      <button onclick="generateOrderMessage('tg')">📨 Send via Telegram</button>
+    </a>
+    <a href="https://yourpaymentlink.com" target="_blank">
+      <button>💳 Pay Online</button>
+    </a><br><br>
     <button onclick="hideCart()">Close</button>
   </div>
 
-  <footer>
-    &copy; 2025 ColorWear. All rights reserved. | Payments via local bank cards
-  </footer>
-
   <script>
-    function switchLang(lang) {
-      document.querySelectorAll('[data-en]').forEach(el => {
-        el.textContent = el.getAttribute('data-' + lang);
-      });
-    }
-
     const cart = [];
 
     function addToCart(name, sizeSelectId, price) {
       const size = document.getElementById(sizeSelectId).value;
-      cart.push(`${name} - Size: ${size} - $${price}`);
-      alert("Added to cart");
+      cart.push(`${name} / Size: ${size} / $${price}`);
+      alert("✅ Added to cart");
+    }
+
+    function generateOrderID() {
+      const date = new Date();
+      const ymd = date.toISOString().slice(0, 10).replace(/-/g, '');
+      const random = Math.floor(Math.random() * 9000 + 1000);
+      const orderId = `CW-${ymd}-${random}`;
+      localStorage.setItem('lastOrderId', orderId);
+      return orderId;
     }
 
     function showCart() {
@@ -158,11 +92,43 @@
         li.textContent = item;
         list.appendChild(li);
       });
+
+      const orderID = generateOrderID();
+      document.getElementById("orderIdText").textContent = `🧾 Order ID: ${orderID}`;
+      document.getElementById("cartModal").setAttribute("data-order-id", orderID);
+
       document.getElementById("cartModal").style.display = "block";
     }
 
     function hideCart() {
       document.getElementById("cartModal").style.display = "none";
+    }
+
+    function generateOrderMessage(platform) {
+      const name = document.getElementById('orderName').value.trim();
+      const phone = document.getElementById('orderPhone').value.trim();
+      const address = document.getElementById('orderAddress').value.trim();
+      const note = document.getElementById('orderNote').value.trim();
+
+      if (!name || !phone || !address) {
+        alert("❗Please fill in Name, Phone, and Address before ordering.");
+        return;
+      }
+
+      const orderID = document.getElementById("cartModal").getAttribute("data-order-id") || generateOrderID();
+
+      let message = `🧾 Order ID: ${orderID}%0AHello, I want to order:%0A`;
+      cart.forEach(item => {
+        message += `- ${item}%0A`;
+      });
+      message += `%0AName: ${name}%0APhone: ${phone}%0AAddress: ${address}%0ANotes: ${note || '-'}`;
+
+      const encoded = encodeURI(message);
+      if (platform === 'wa') {
+        document.getElementById("whatsappLink").href = `https://wa.me/85512345678?text=${encoded}`;
+      } else {
+        document.getElementById("telegramLink").href = `https://t.me/your_telegram_username?text=${encoded}`;
+      }
     }
   </script>
 </body>
