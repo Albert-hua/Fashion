@@ -184,7 +184,7 @@
     }
 
     window.onload = function() {
-      toggleLang(); // 默认切换一次
+      toggleLang(); // 默认切换一次语言
       const history = JSON.parse(localStorage.getItem("orderHistory") || "[]");
       const ul = document.getElementById("historyUl");
       history.forEach(record => {
